@@ -9,6 +9,7 @@ const articles = [
 // 3秒間待機
 async function fetchArticles() {
   await new Promise((resolve) => setTimeout(resolve, 3000))
+  throw new Error("エラー")
   return articles
 }
 
