@@ -1,3 +1,9 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "ブラグ記事の一覧が表示されます",
+};
 
 // ダミーデータ
 const articles = [
@@ -9,7 +15,7 @@ const articles = [
 // 3秒間待機
 async function fetchArticles() {
   await new Promise((resolve) => setTimeout(resolve, 3000))
-  throw new Error("エラー")
+  // throw new Error("エラー")
   return articles
 }
 
