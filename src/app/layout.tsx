@@ -13,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>
+        <header className="bg-blue-200 p-4">
+          Rootヘッダー
+        </header>
         {children}
       </body>
     </html>
