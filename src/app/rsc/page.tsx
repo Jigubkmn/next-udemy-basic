@@ -1,7 +1,11 @@
+import ClientComponent from "@/components/ClientComponent"
 
 export default function rscPage() {
   console.log("rscPage")
   return (
-    <div>rscPage</div>
+    <div>
+      サーバーコンポーネント
+      <ClientComponent />
+    </div>
   )
 }
