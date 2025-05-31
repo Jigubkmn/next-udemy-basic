@@ -2,8 +2,19 @@
 import { redirect } from "next/navigation"
 import { contactSchema } from "@/validations/contact"
 
+// ActionStateの型定義
+type ActionState = {
+  success: boolean
+  error: {
+    name?: string[]
+    email?: string[]
+  };
+  serverError?: string;
+}
 // formData：フォームデータを取得
-export async function submitContactForm(formData: FormData) {
+export async function submitContactForm(
+  prevState: ActionState, // useActionStateの初期値
+  formData: FormData): Promise<ActionState> {
   const name = formData.get("name")
   const email = formData.get("email")
   console.log(name, email)
@@ -11,9 +22,16 @@ export async function submitContactForm(formData: FormData) {
   // バリデーション
   const validationResult = contactSchema.safeParse({name,email})
   if (!validationResult.success) {
-    const errors = validationResult.error.flatten()
+    const errors = validationResult.error.flatten().fieldErrors
     console.log("サーバー側でエラー", errors)
-    return {}
+    return {
+      success: false,
+      error: {
+        name: errors.name || [],
+        email: errors.email || [],
+      },
+      serverError: "バリデーションエラーがあります"
+    }
   }
   // DB登録
 
