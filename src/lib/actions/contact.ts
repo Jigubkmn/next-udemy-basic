@@ -1,6 +1,6 @@
 "use server"
 import { redirect } from "next/navigation"
-import { contactSchema } from "@/validations/contact"
+import { ContactSchema } from "@/validations/contact"
 
 // ActionStateの型定義
 type ActionState = {
@@ -20,7 +20,7 @@ export async function submitContactForm(
   console.log(name, email)
 
   // バリデーション
-  const validationResult = contactSchema.safeParse({name,email})
+  const validationResult = ContactSchema.safeParse({name,email})
   if (!validationResult.success) {
     const errors = validationResult.error.flatten().fieldErrors
     console.log("サーバー側でエラー", errors)
