@@ -1,5 +1,6 @@
 "use server"
 import { redirect } from "next/navigation"
+import { contactSchema } from "@/validations/contact"
 
 // formData：フォームデータを取得
 export async function submitContactForm(formData: FormData) {
@@ -8,6 +9,12 @@ export async function submitContactForm(formData: FormData) {
   console.log(name, email)
 
   // バリデーション
+  const validationResult = contactSchema.safeParse({name,email})
+  if (!validationResult.success) {
+    const errors = validationResult.error.flatten()
+    console.log("サーバー側でエラー", errors)
+    return {}
+  }
   // DB登録
 
   redirect("/contacts/complete")
