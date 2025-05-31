@@ -8,7 +8,7 @@ export async function submitContactForm(formData: FormData) {
   console.log(name, email)
 
   // バリデーション
-  //　DB登録
+  // DB登録
 
   redirect("/contacts/complete")
 }
